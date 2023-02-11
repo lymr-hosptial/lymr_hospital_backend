@@ -1,7 +1,7 @@
-FROM node:alpine
-WORKDIR /usr/app
-COPY package*.json ./
+FROM node:14-alpine3.12
+WORKDIR /usr/src/registration
+COPY package.json /usr/src/package.json
 RUN npm install 
 COPY . . 
 EXPOSE 3000
-CMD npm start
+CMD [ "node", "index.js" ]
