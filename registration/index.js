@@ -40,7 +40,7 @@ MongoClient.connect(uri)
   gender: 'M',
   address: 'mira1',
   phone: '0551111111',
-  date_of_birth: new Date("30/12/1985"),
+  date_of_birth: new Date("1985-12-30"),
   status: 'active',
   bloodtype: 'A+'	 };
   db.collection('patient').insertOne(myobj, function(err, res) {
