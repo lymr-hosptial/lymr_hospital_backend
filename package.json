@@ -1,0 +1,19 @@
+{
+  "name": "lymr-hospital-rami",
+  "version": "1.0.0",
+  "description": "Three Modules by Rami",
+  "main": "getPatientReports.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lymr-hosptial/lymr_hospital_backend.git"
+  },
+  "author": "Rami Akabawi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lymr-hosptial/lymr_hospital_backend/issues"
+  },
+  "homepage": "https://github.com/lymr-hosptial/lymr_hospital_backend#readme"
+}
