@@ -9,7 +9,7 @@ app.use(bodyParser.json({limit:'100mb'}));
 app.use(bodyParser.urlencoded({limit:'100mb', extended:true}));
 
 const {MongoClient} = require('mongodb');
-const uri = "mongodb://localhost:27017/"; //database server URI
+const uri = "mongodb+srv://makram:makram@cluster0.uhuavyj.mongodb.net/"; //database server URI
 
 MongoClient.connect(uri) //connect to the server
   .then(client => {
