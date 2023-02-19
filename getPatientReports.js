@@ -31,7 +31,7 @@ MongoClient.connect(uri) //connect to the server
             'from': 'report', 
             'localField': '_id', 
             'foreignField': 'patient_id', 
-            'as': 'result'
+            'as': 'report(s)'
           }
         }
       ]
