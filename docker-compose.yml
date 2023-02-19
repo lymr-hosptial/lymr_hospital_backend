@@ -13,6 +13,12 @@ services:
       - "3006:3000"
     networks:
       - backend
+  viewpatientdata:
+    build: viewpatientdata/.
+    ports:
+      - "3007:3000"
+    networks:
+      - backend
 # mongo:
 #     container_name: "mongo-node"
 #     platform: linux/amd64
