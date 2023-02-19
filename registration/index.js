@@ -33,7 +33,22 @@ MongoClient.connect(uri)
       })
       .catch(error => console.error(error))
   });
-    
+  var myobj = { 
+  first_name:'Makram',
+  last_name: 'almasarwa',
+  email: 'm.a@gmail.com',
+  gender: 'M',
+  address: 'mira1',
+  phone: '0551111111',
+  date_of_birth: new Date("30/12/1985"),
+  status: 'active',
+  bloodtype: 'A+'	 };
+  db.collection('patient').insertOne(myobj, function(err, res) {
+    if (err) throw err;
+    console.log("1 document inserted");
+    db.close();
+  });
+     
 })
 // app.use(cors());
 
