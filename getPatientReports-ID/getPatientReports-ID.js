@@ -15,9 +15,9 @@ MongoClient.connect(uri) //connect to the server
   .then(client => {
     const db = client.db('hospitaldb'); //select the datbase
 
-    app.get('/patient/reports/', (req, res)=>{    
+    app.get('/patient/reports-id/', (req, res)=>{    
       
-      //get email from the API request
+      //get patient ID from the API request
       const pat_id = req.query.id.toString();
 
       //contruct the query in JSON
