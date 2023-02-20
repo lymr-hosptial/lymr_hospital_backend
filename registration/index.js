@@ -33,23 +33,39 @@ MongoClient.connect(uri)
       })
       .catch(error => console.error(error))
   });
-  var myobj = { 
-  first_name:'Makram',
-  last_name: 'almasarwa',
-  email: 'm.a@gmail.com',
-  gender: 'M',
-  address: 'mira1',
-  phone: '0551111111',
-  date_of_birth: new Date("1985-12-30"),
-  status: 'active',
-  bloodtype: 'A+'	 };
-  db.collection('patient').insertOne(myobj, function(err, res) {
-    if (err) throw err;
-    console.log("1 document inserted");
-    db.close();
-  });
-     
-})
+  app.post('/newpatient', (req, res)=>{
+    //get values from API request
+    const first_name =req.query.fn.toString();
+    const last_name =req.query.ln.toString();  
+    const phone =req.query.ph.toString();  
+    const gender =req.query.ge.toString();  
+    const address =req.query.ad.toString();  
+    const bloodtype =req.query.bt.toString();    
+    const status =req.query.st.toString();  
+    const email =req.query.em.toString();  
+    const date_of_birth = new Date(req.query.dob);  
+
+    //construct query in JSON
+    const query ={ 
+      "first_name": first_name,
+      "last_name" : last_name,
+      "email": email,
+      "gender": gender,
+      "phone": phone,
+      "address": address,
+      "date_of_birth" : date_of_birth,
+      "status": status,
+      "bloodtype": bloodtype}
+      console.log(query);
+
+    db.collection('patient').insertOne(query)
+      .then(results => {
+      // console.log(results)
+        res.send(results);
+      })
+      .catch(error => console.error(error))
+   });  
+});
 // app.use(cors());
 
 app.get('/registration', (req, res) => res.send('lymr Registration, API!'));
