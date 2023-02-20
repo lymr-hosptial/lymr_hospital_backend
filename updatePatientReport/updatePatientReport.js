@@ -1,6 +1,5 @@
 const server = require('express');
 const bodyParser = require('body-parser');
-// const cors = require('cors');
 require('dotenv').config();
 
 const port = process.env.SERVERPORT || 3050;
@@ -17,7 +16,7 @@ MongoClient.connect(uri) //connect to the server
 
     app.post('/patient/reports/update/', (req, res)=>{    
       
-      //get email from the API request
+      //get email and new description from the API request
       const rep_id = req.query.id.toString();
       const new_desc = req.query.desc.toString();
 
@@ -34,4 +33,4 @@ MongoClient.connect(uri) //connect to the server
     
 })
 
-app.listen(port, () => console.log(`Listening on port ${port}!`));
+app.listen(port, () => console.log(`Listening on port ${port}...`));

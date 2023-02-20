@@ -1,6 +1,5 @@
 const server = require('express');
 const bodyParser = require('body-parser');
-// const cors = require('cors');
 require('dotenv').config();
 
 const port = process.env.SERVERPORT || 3050;
@@ -56,4 +55,4 @@ MongoClient.connect(uri) //connect to the server
     
 })
 
-app.listen(port, () => console.log(`Listening on port ${port}!`));
+app.listen(port, () => console.log(`Listening on port ${port}...`));
