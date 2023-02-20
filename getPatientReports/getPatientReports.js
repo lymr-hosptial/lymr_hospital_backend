@@ -37,11 +37,11 @@ MongoClient.connect(uri) //connect to the server
       ]
       db.collection('patient').aggregate(query).toArray() //query the databese using MongoDB aggregation
        .then(results => {
-          res.send(results); // sending the respone
+          res.send(results); // sending the response
         })
         .catch(error => console.error(error))
   });
     
 })
 
-app.listen(port, () => console.log(`Listening on port ${port}!`));
+app.listen(port, () => console.log(`Listening on port ${port}...`));
