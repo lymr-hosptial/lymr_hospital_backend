@@ -14,7 +14,7 @@ MongoClient.connect(uri) //connect to the server
   .then(client => {
     const db = client.db('hospitaldb'); //select the datbase
 
-    app.post('/patient/reports/update/', (req, res)=>{    
+    app.post('/patient/reports/update/', async function(req, res){    
       
       //get email and new description from the API request
       const rep_id = req.query.id.toString();
@@ -24,11 +24,8 @@ MongoClient.connect(uri) //connect to the server
       const query = {_id: new ObjectId(rep_id)}
       const update_value = { $set: {description: new_desc} }
 
-      //query the databese and update the document
-      db.collection('report').updateOne(query, update_value, function (err, results) {
-          res.send('success'); // sending the respone
-        })
-        .catch(error => console.error(error))
+      const result = await db.collection('report').updateOne(query, update_value);
+      res.send(result); // sending the response
   });
     
 })
