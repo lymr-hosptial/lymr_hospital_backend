@@ -39,7 +39,7 @@ MongoClient.connect(uri) //connect to the server
        .then(results => {
           res.send(results); // sending the response
         })
-        .catch(error => console.error(error))
+        .catch(error => res.send(error))
   });
     
 })
