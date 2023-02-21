@@ -24,8 +24,11 @@ MongoClient.connect(uri) //connect to the server
       const query = {_id: new ObjectId(rep_id)}
       const update_value = { $set: {description: new_desc} }
 
-      const result = await db.collection('report').updateOne(query, update_value);
-      res.send(result); // sending the response
+      db.collection('report').updateOne(query, update_value) //updating the report
+       .then(results => {
+          res.send(results); // sending the respone
+        })
+        .catch(error => res.send(error))
   });
     
 })
