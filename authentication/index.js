@@ -26,7 +26,7 @@ function authToken(req, res, next) {
     console.log(bearer);
     const token = bearer[1];
     req.token = token;
-    next();
+    next();//nodejs 
   } else {
     res.sendStatus(403);
   }
@@ -71,7 +71,7 @@ app.post("/api/newemployee", authToken, (req, res) => {
         position,
         active,
       } = req.body;
-      console.log(req.body);
+      // console.log(req.body);
       let query = {
         "first_name" :first_name,
         "last_name" :last_name,
@@ -81,18 +81,19 @@ app.post("/api/newemployee", authToken, (req, res) => {
         "address":address,
         "username":username,
         "password":password,
-        "date_of_birth":date_of_birth,
-        "date_of_join":date_of_join,
+        "date_of_birth":new Date(date_of_birth),
+        "date_of_join":new Date(date_of_join),
         "role":role,
         "position":position,
         "active":active
       }
+      console.log(query);
       db.collection('employee').insertOne(query)
       .then(results => {
       // console.log(results)
         res.send(results);
       })
-      .catch(error => console.error(error)); 
+      .catch(error => res.send(error)); 
     }else{
       res.sendStatus(403);
     } 
