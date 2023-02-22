@@ -17,7 +17,7 @@ MongoClient.connect(uri)
     // console.log(quotesCollection);
     // API for to get all employees
     app.get('/getAllEmployees', (req, res)=>{
-      db.collection('employee').find({"email":"gbrownlow1a@posterous.com"}).toArray()
+      db.collection('employee').find({"email":"m.a@gmail.com"}).toArray()
         .then(results => {
           // console.log(results)
           res.json(results); // sending the data in json format
@@ -26,7 +26,7 @@ MongoClient.connect(uri)
   });
 
   app.get('/getallpatients', (req, res)=>{
-    db.collection('patient').find().toArray()
+    db.collection('patient').find({"email":"m.a@gmail.com"}).toArray()
       .then(results => {
         // console.log(results)
         res.json(results);
