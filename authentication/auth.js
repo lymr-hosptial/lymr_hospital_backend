@@ -27,15 +27,13 @@ MongoClient.connect(uri) //connect to the server
         .find({ username: username, password:password })
         .toArray()
         .then((results) => {
-            console.log(results);
-            //res.json(results); // sending the data in json format
             if (results.length != 0) {
             jwt_token.sign({username:username},'lymar',(err, token)=>{
                 res.json({username,"user_id":results[0]._id,token,"message":"logged in successfully"});
             });
             }else{
             let userNotExist = {
-                message : "User not exist in our system .contact the administrator"
+                message : "Authentication failed"
             }
             res.json(userNotExist); //sending user doesn't exist
             }
