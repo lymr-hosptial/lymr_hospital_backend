@@ -40,7 +40,7 @@ MongoClient.connect(uri) //connect to the server
       const access = await dba.collection('acl').find({'role':arole[0].role}).toArray();      //get the access right from the acl collection in the DB
       const roleAccess= access[0].access;
 
-      if (!roleAccess.includes('registration')) {     //check if the username is authorized to access patient data
+      if (!roleAccess.includes('registration')) {     //check if the username is authorized to register new employees
         res.json({'Error':'User not authorised'})   //User is not authorized
       }else {
           //contruct the query in JSON
