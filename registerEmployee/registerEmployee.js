@@ -1,22 +1,25 @@
 const server = require('express');
 const bodyParser = require('body-parser');
-require('dotenv').config();
+require('dotenv').config({path: '../.env'});
+const jwt_token = require('jsonwebtoken')
 
-const port = process.env.SERVERPORT || 3050;
+const port = process.env.SERVERPORT;
+const key = process.env.KEY;
 const app = server();
 app.use(bodyParser.json({limit:'100mb'}));
 app.use(bodyParser.urlencoded({limit:'100mb', extended:true}));
 
 const {MongoClient} = require('mongodb');
+const { JsonWebTokenError } = require('jsonwebtoken');
 const uri = "mongodb+srv://makram:makram@cluster0.uhuavyj.mongodb.net/"; //database server URI
 
 MongoClient.connect(uri) //connect to the server
   .then(client => {
-    const db = client.db('hospitaldb'); //select the datbase
+    const dba = client.db('hospitaldb'); //select the datbase
 
-    app.post('/register/employee/', (req, res)=>{    
+    app.post('/register/employee/', async function(req, res){    
       
-      //get values from the API request
+      //get values and token from the API request
       const email = req.query.em.toString();
       const first_name = req.query.fn.toString();
       const last_name = req.query.ln.toString();
@@ -30,28 +33,39 @@ MongoClient.connect(uri) //connect to the server
       const role = req.query.role.toString();
       const pos = req.query.pos.toString();
 
-      //contruct the query in JSON
-      const query = {
-        "email": email, 
-        "first_name": first_name,
-        "last_name": last_name,
-        "gender": gender,
-        "phone": phone,
-        "address": addr,
-        "username": username,
-        "password": password,
-        "date_of_birth": dob,
-        "date_of_join": doj,
-        "role": role,
-        "position": pos,
-        "active":true
-      }
-      db.collection('employee').insertOne(query) //inserting the JSON file in the collection 'employee'
-       .then(results => {
-          res.send(results); // sending the respone
-        })
-        .catch(error => res.send(error))
-  });
+      const token = req.query.token;
+      const us = jwt_token.verify(token,key); //verify the token and get the username
+
+      const arole = await dba.collection('employee').find({'username':us.username}).toArray();    //get the role from the employee collection in the DB
+      const access = await dba.collection('acl').find({'role':arole[0].role}).toArray();      //get the access right from the acl collection in the DB
+      const roleAccess= access[0].access;
+
+      if (!roleAccess.includes('registration')) {     //check if the username is authorized to access patient data
+        res.json({'Error':'User not authorised'})   //User is not authorized
+      }else {
+          //contruct the query in JSON
+          const query = {
+            "email": email, 
+            "first_name": first_name,
+            "last_name": last_name,
+            "gender": gender,
+            "phone": phone,
+            "address": addr,
+            "username": username,
+            "password": password,
+            "date_of_birth": dob,
+            "date_of_join": doj,
+            "role": role,
+            "position": pos,
+            "active":true
+          }
+          db.collection('employee').insertOne(query) //inserting the JSON file in the collection 'employee'
+          .then(results => {
+              res.send(results); // sending the respone
+            })
+            .catch(error => res.send(error))
+        }
+    });
     
 })
 

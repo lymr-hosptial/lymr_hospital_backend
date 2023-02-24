@@ -1,6 +1,5 @@
 const server = require('express');
 const bodyParser = require('body-parser');
-// const cors = require('cors');
 require('dotenv').config({path: '../.env'});
 const jwt_token = require('jsonwebtoken')
 
@@ -16,24 +15,24 @@ const uri = "mongodb+srv://makram:makram@cluster0.uhuavyj.mongodb.net/"; //datab
 
 
 
-MongoClient.connect(uri).then(client => {; //connect to the server
-    const dba = client.db('hospitaldb'); //select the datbase
+MongoClient.connect(uri).then(client => {;    //connect to the server
+    const dba = client.db('hospitaldb');      //select the datbas
     
     app.get('/patient/reports-id/', async function(req, res){    
       
-      //get patient ID from the API request
+      //get patient ID and token from the API request
       const pat_id = req.query.id.toString();
       const token = req.query.token;
-      const us = jwt_token.verify(token,key);
+      const us = jwt_token.verify(token,key); //verify the token and get the username
       
-      const role = await dba.collection('employee').find({'username':us.username}).toArray()
-      const access = await dba.collection('acl').find({'role':role[0].role}).toArray()  
+      const role = await dba.collection('employee').find({'username':us.username}).toArray();    //get the role from the employee collection in the DB
+      const access = await dba.collection('acl').find({'role':role[0].role}).toArray();      //get the access right from the acl collection in the DB
       const roleAccess= access[0].access;
         
 
-      if (!roleAccess.includes('patient_data')) {
-          res.json({'Error':'User not authorised'})
-      }else {
+      if (!roleAccess.includes('patient_data')) {     //check if the username is authorized to access patient data
+          res.json({'Error':'User not authorised'})   //User is not authorized
+      }else {                                      //user is authorized
           //contruct the query in JSON
           const query = [
             {
