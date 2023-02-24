@@ -59,7 +59,7 @@ MongoClient.connect(uri) //connect to the server
             "position": pos,
             "active":true
           }
-          db.collection('employee').insertOne(query) //inserting the JSON file in the collection 'employee'
+          dba.collection('employee').insertOne(query) //inserting the JSON file in the collection 'employee'
           .then(results => {
               res.send(results); // sending the respone
             })
