@@ -1,6 +1,6 @@
 const server = require('express');
 const bodyParser = require('body-parser');
-require('dotenv').config({path: '../.env'});
+require('dotenv').config({path: '/home/akabawi/Documents/DevOps/lymr-hospital/lymr_hospital_backend/.env'});
 const jwt_token = require('jsonwebtoken')
 
 const port = process.env.SERVERPORT;
