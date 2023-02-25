@@ -1,7 +1,7 @@
 const server = require('express');
 const bodyParser = require('body-parser');
 // const cors = require('cors');
-require('dotenv').config({path:'/home/akabawi/Documents/DevOps/lymr-hospital/lymr_hospital_backend/.env'});
+require('dotenv').config({path:'../.env'});
 const jwt_token = require("jsonwebtoken");
 
 
