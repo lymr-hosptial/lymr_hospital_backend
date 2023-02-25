@@ -37,8 +37,5 @@ MongoClient.connect(uri) //connect to the server
   
   app.get('/registration', (req, res) => res.send('lymr PatientData, API!'));
 
-
-  app.get('/newemployee', (req, res)=>{
-  res.send('new employee is created in lymr database!');
-})
+  },
 app.listen(port, () => console.log(`Registration API listening on port ${port}!`));

@@ -38,7 +38,7 @@ MongoClient.connect(uri) //connect to the server
     const roleAccess= access[0].access;
 
     if (!roleAccess.includes('registration')) {     //check if the username is authorized to register new employees
-      res.json({'Error':'User not authorised'})   //User is not authorized
+      res.json({'Error':'User not authorized'})   //User is not authorized
     } else {
     //construct query in JSON
     const query ={ 
