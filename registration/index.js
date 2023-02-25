@@ -1,40 +1,25 @@
 const server = require('express');
 const bodyParser = require('body-parser');
-// const cors = require('cors');
-require('dotenv').config();
+require('dotenv').config({path: '../.env'});
+const jwt_token = require('jsonwebtoken')
 
-const port = process.env.SERVERPORT || 3000;
+const port = process.env.SERVERPORT;
+const key = process.env.KEY;
 const app = server();
 app.use(bodyParser.json({limit:'100mb'}));
 app.use(bodyParser.urlencoded({limit:'100mb', extended:true}));
 
 const {MongoClient} = require('mongodb');
-const uri = "mongodb+srv://makram:makram@cluster0.uhuavyj.mongodb.net/";
-MongoClient.connect(uri)
-  .then(client => {
-    const db = client.db('hospitaldb');
-    // const employeeCollection = db.collection('employee');
-    // console.log(quotesCollection);
-    // API for to get all employees
-    app.get('/getAllEmployees', (req, res)=>{
-      db.collection('employee').find({"email":"gbrownlow1a@posterous.com"}).toArray()
-        .then(results => {
-          // console.log(results)
-          res.json(results); // sending the data in json format
-        })
-        .catch(error => console.error(error))
-  });
+const { JsonWebTokenError } = require('jsonwebtoken');
+const uri = "mongodb+srv://makram:makram@cluster0.uhuavyj.mongodb.net/"; //database server URI
 
-  app.get('/getallpatients', (req, res)=>{
-    db.collection('patient').find().toArray()
-      .then(results => {
-        // console.log(results)
-        res.json(results);
-      })
-      .catch(error => console.error(error))
-  });
-  app.post('/newpatient', (req, res)=>{
-    //get values from API request
+MongoClient.connect(uri) //connect to the server
+  .then(client => {
+    const dba = client.db('hospitaldb'); //select the datbase
+    
+
+  app.post('/newpatient', async function(req, res){
+    //get values and token from API request
     const first_name =req.query.fn.toString();
     const last_name =req.query.ln.toString();  
     const phone =req.query.ph.toString();  
@@ -44,7 +29,17 @@ MongoClient.connect(uri)
     const status =req.query.st.toString();  
     const email =req.query.em.toString();  
     const date_of_birth = new Date(req.query.dob);  
+    
+    const token = req.query.token;
+    const us = jwt_token.verify(token,key); //verify the token and get the username
 
+    const arole = await dba.collection('employee').find({'username':us.username}).toArray();    //get the role from the employee collection in the DB
+    const access = await dba.collection('acl').find({'role':arole[0].role}).toArray();      //get the access right from the acl collection in the DB
+    const roleAccess= access[0].access;
+
+    if (!roleAccess.includes('registration')) {     //check if the username is authorized to register new employees
+      res.json({'Error':'User not authorised'})   //User is not authorized
+    } else {
     //construct query in JSON
     const query ={ 
       "first_name": first_name,
@@ -58,20 +53,14 @@ MongoClient.connect(uri)
       "bloodtype": bloodtype}
       console.log(query);
 
-    db.collection('patient').insertOne(query)
+    dba.collection('patient').insertOne(query)  //inserting the JSON file in the collection 'patient'
       .then(results => {
-      // console.log(results)
         res.send(results);
       })
       .catch(error => console.error(error))
-   });  
-});
-// app.use(cors());
-
-app.get('/registration', (req, res) => res.send('lymr Registration, API!'));
-
-
-app.get('/newemployee', (req, res)=>{
-  res.send('new employee is created in lymr database!');
+    }
+  });
+  
 })
-app.listen(port, () => console.log(`Registration API listening on port ${port}!`));
+
+app.listen(port, () => console.log(`Listening on port ${port}...`));
