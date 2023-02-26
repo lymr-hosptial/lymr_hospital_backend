@@ -16,7 +16,7 @@
         "cors": "^2.8.5",
         "dotenv": "^16.0.3",
         "express": "^4.18.2",
-        "express-openid-connect": "^2.12.0",
+        "index.js": "^0.0.3",
         "jsonwebtoken": "^9.0.0",
         "mongodb": "^5.0.1",
         "nodemon": "^2.0.20",

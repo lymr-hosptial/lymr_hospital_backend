@@ -104,3 +104,4 @@ app.post("/api/newemployee", authToken, (req, res) => {
 app.listen(port, () =>
   console.log(`Authentication API listening on port ${port}!`)
 );
+
