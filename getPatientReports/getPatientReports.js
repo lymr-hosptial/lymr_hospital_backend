@@ -3,8 +3,8 @@ const bodyParser = require('body-parser');
 require('dotenv').config({path: '../.env'});
 const jwt_token = require('jsonwebtoken')
 
-const port = process.env.SERVERPORT;
-const key = process.env.KEY;
+const port = process.env.SERVERPORT || 3002;
+const key = process.env.SECRET_TOKEN;
 const app = server();
 app.use(bodyParser.json({limit:'100mb'}));
 app.use(bodyParser.urlencoded({limit:'100mb', extended:true}));
