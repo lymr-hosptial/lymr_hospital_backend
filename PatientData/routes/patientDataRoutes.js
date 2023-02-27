@@ -8,5 +8,6 @@ const dataController = require('../controllers/patientDataController');
 
 router.route('/getpatientreportbyemail').get(authToken,dataController.getPatientReportEmail);
 router.route('/getpatientreportid').get(authToken, dataController.getPatientReportID);
+router.route('/updatepatientreport').post(authToken, dataController.updatePatientReport);
 
 module.exports = router;

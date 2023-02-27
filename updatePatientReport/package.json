@@ -17,9 +17,12 @@
   },
   "homepage": "https://github.com/lymr-hosptial/lymr_hospital_backend#readme",
   "dependencies": {
-    "body-parser": "^1.20.1",
+    "body-parser": "^1.20.2",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "mongodb": "^5.0.1"
+    "fs": "^0.0.1-security",
+    "jsonwebtoken": "^9.0.0",
+    "mongodb": "^5.1.0",
+    "path": "^0.12.7"
   }
 }
