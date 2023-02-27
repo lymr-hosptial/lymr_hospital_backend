@@ -17,7 +17,7 @@ const login = (req, res) => {
     if (results) {
       jwt_token.sign(
         { username: username },
-        process.env.SECRET_TOKEN,
+        process.env.KEY,
         (err, token) => {
           return res.status(200).json({
             username,
