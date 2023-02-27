@@ -59,10 +59,8 @@ const token = req.token;
 const us = jwt_token.verify(token,key); //verify the token and get the username
 
 dbInstance(async(db)=>{
-    console.log("line 60");
     const role = await db.collection('employee').find({'username':us.username}).toArray();    //get the role from the employee collection in the DB
     const access = await db.collection('acl').find({'role':role[0].role}).toArray();      //get the access right from the acl collection in the DB
-    // console.log(access);
     var roleAccess= access[0].access;
     if (!roleAccess.includes('patient_data')) {     //check if the username is authorized to access patient data
        return res.json({'Error':'User not authorised'})   //User is not authorized
@@ -82,7 +80,6 @@ dbInstance(async(db)=>{
             }
           }
         ]
-        console.log("line 83");
         const results = await db.collection('patient').aggregate(query).toArray(); //query the databese using MongoDB aggregation
             if(results) {
                 return res.send(results); // sending the response
