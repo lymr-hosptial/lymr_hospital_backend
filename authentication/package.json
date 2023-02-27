@@ -7,7 +7,7 @@
         "start": "node index.js"
     },
     "keywords": [],
-    "author": "",
+    "author": "Lavanya Seetharaman",
     "license": "ISC",
     "dependencies": {
         "accesscontrol": "^2.2.1",
