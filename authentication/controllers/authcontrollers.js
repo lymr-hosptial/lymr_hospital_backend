@@ -17,8 +17,9 @@ const login = (req, res) => {
     if (results) {
       jwt_token.sign(
         { username: username },
-        process.env.SECRET_TOKEN,
+        'lymar',   //process.env.KEY,
         (err, token) => {
+          console.log();
           return res.status(200).json({
             username,
             user_id: results[0]._id,

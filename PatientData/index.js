@@ -1,41 +1,48 @@
-const server = require('express');
-const bodyParser = require('body-parser');
-require('dotenv').config({path: '../.env'});
-const jwt_token = require('jsonwebtoken')
-
-const port = process.env.SERVERPORT;
-const key = process.env.KEY;
+const server = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const filesystem = require("fs");
+const path = require("path");
+const jwt_token = require("jsonwebtoken");
+const dotenv = require("dotenv");
+const authRoutes = require("./routes/patientDataRoutes");
+const port = process.env.SERVERPORT || 3000;
+const BASE_URL = `/api/${process.env.VERSION || "v1"}`;
+dotenv.config();
 const app = server();
-app.use(bodyParser.json({limit:'100mb'}));
-app.use(bodyParser.urlencoded({limit:'100mb', extended:true}));
+app.use(bodyParser.json({ limit: "100mb" }));
+app.use(bodyParser.urlencoded({ limit: "100mb", extended: true }));
+app.use(server.json(), cors());
+//CORS-HEADERS- Required for cross origin and cross server communication
+app.use((req, res, next) => {
+  res.setHeader("Access-Control_Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin,X-Requested-With,Content-Type,Accept,Authorization"
+  );
 
-const {MongoClient} = require('mongodb');
-const { JsonWebTokenError } = require('jsonwebtoken');
-const uri = "mongodb+srv://makram:makram@cluster0.uhuavyj.mongodb.net/"; //database server URI
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET",
+    "POST",
+    "PATCH",
+    "DELETE",
+    "OPTIONS"
+  );
+  next();
+});
+app.get("/", (req, res) => res.send("lymr patient data, API!"));
 
-MongoClient.connect(uri) //connect to the server
-  .then(client => {
-    const dba = client.db('hospitaldb'); //select the datbase
-    
-    app.get('/getAllEmployees', (req, res)=>{
-      db.collection('employee').find({"email":"gbrownlow1a@posterous.com"}).toArray()
-        .then(results => {
-          // console.log(results)
-          res.json(results); // sending the data in json format
-        })
-        .catch(error => console.error(error))
+
+filesystem.readdir(path.join(__dirname, "routes"), (err, files) => {
+  if (err) console.error("error in index readdir" + err);
+
+  files.forEach((file) => {
+    console.log("LYMR Patient Data index");
+    app.use(BASE_URL, require(`./routes/${file}`));
   });
+});
+app.listen(port, () =>
+  console.log(`Patient Data API listening on port ${port}!`)
+);
 
-  app.get('/getallpatients', (req, res)=>{
-    db.collection('patient').find().toArray()
-      .then(results => {
-        // console.log(results)
-        res.json(results);
-      })
-      .catch(error => console.error(error))
-  });
-  
-  app.get('/registration', (req, res) => res.send('lymr PatientData, API!'));
-
-  },
-app.listen(port, () => console.log(`Registration API listening on port ${port}!`));
