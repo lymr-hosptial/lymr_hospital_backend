@@ -1,0 +1,20 @@
+version: "3.3"
+
+services:
+  authentication:
+    build: authentication/.
+    ports:
+      - "3005:3000"
+    networks:
+      - backend
+  registration:
+    build: registration/.
+    ports:
+      - "3006:3000"
+    networks:
+      - backend
+  
+
+networks:
+  backend:
+    driver: bridge
