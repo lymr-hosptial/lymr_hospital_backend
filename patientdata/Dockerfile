@@ -1,5 +1,5 @@
 FROM node:14-alpine3.12
-WORKDIR /usr/src/PatientData
+WORKDIR /usr/src/patientdata
 COPY package.json /usr/src/package.json
 RUN npm install 
 COPY . . 
