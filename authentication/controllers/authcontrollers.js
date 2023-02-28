@@ -19,6 +19,7 @@ const login = (req, res) => {
         { username: username },
         process.env.KEY,
         (err, token) => {
+          console.log();
           return res.status(200).json({
             username,
             user_id: results[0]._id,
