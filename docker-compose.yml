@@ -13,6 +13,12 @@ services:
       - "3006:3000"
     networks:
       - backend
+  patientdata:
+    build: patientdata/.
+    ports:
+      - "3008:3000"
+    networks:
+      - backend    
   
 
 networks:
