@@ -8,7 +8,7 @@ const dbInstance = async(operations, response)=>{
         await operations(db);
         db_client.close();
     }catch(error){
-        response.send(500).json({message:'Error in connecting to lymr DB.Try Again', err});
+        response.send(500).json({message:'Error in connecting to lymr DB.Try Again', error});
     }
 }
 
