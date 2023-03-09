@@ -3,7 +3,7 @@ pipeline{
     stages{
         stage('Stage 1'){
             steps{
-                sh 'docker compose up -d'
+                sh 'whoami'
             }
         }
     }
