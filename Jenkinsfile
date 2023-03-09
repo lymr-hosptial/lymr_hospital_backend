@@ -3,7 +3,7 @@ pipeline{
     stages{
         stage('Stage 1'){
             steps{
-                sh 'docker info'
+                sh 'docker build -t authentication ./authentication/'
             }
         }
     }
