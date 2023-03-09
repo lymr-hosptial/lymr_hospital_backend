@@ -3,7 +3,7 @@ pipeline{
     stages{
         stage('Stage 1'){
             steps{
-                sh 'ping registry.npmjs.org'
+                sh 'docker compose up -d'
             }
         }
     }
