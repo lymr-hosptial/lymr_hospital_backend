@@ -3,7 +3,7 @@ pipeline{
     stages{
         stage('Stage 1'){
             steps{
-                sh 'whoami'
+                sh 'sudo -u akabawi -i whoami'
             }
         }
     }
