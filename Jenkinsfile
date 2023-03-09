@@ -3,7 +3,7 @@ pipeline{
     stages{
         stage('Stage 1'){
             steps{
-                sh ''' sudo -u akabawi -i '/usr/bin/docker compose up -d' '''
+                sh ''' sudo -u akabawi docker compose up -d '''
             }
         }
     }
