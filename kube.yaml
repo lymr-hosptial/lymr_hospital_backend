@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: authentication
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      authentication: web
+  template:
+    metadata:
+      labels:
+        authentication: web
+    spec:
+      containers:
+      - name: auth-cont
+        image: auth-im
+        imagePullPolicy: Never
+      - name: auth-cont
+        image: auth-im
+        imagePullPolicy: Never
+      - name: auth-cont
+        image: auth-im
+        imagePullPolicy: Never
