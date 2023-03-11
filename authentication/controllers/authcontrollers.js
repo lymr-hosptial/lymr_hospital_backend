@@ -3,7 +3,7 @@ const jwt_token = require("jsonwebtoken");
 const dotenv = require("dotenv");
 dotenv.config();
 const userNotExist = {
-  message: "User not exist in our system .contact the administrator",
+  message: "User does not exist in our system. Please contact the administrator",
 };
 const login = (req, res) => {
   let { username, password } = req.body;
@@ -13,7 +13,7 @@ const login = (req, res) => {
       .collection("employee")
       .find({ username: username, password: password })
       .toArray();
-    console.log(results);
+    //console.log(results);
     if (results) {
       jwt_token.sign(
         { username: username },

@@ -45,4 +45,5 @@ filesystem.readdir(path.join(__dirname, "routes"), (err, files) => {
 app.listen(port, () =>
   console.log(`Authentication API listening on port ${port}!`)
 );
+module.exports = app;
 
