@@ -1,7 +1,7 @@
 const { assert } = require("chai");
 const chai = require("chai");
 const chaiHttp = require("chai-http");
-let server = require("index");
+//let server = require("index");
 
 chai.should();
 chai.use(chaiHttp);
