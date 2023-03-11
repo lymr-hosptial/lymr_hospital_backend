@@ -6,13 +6,21 @@ let server = require("../authentication/index");
 chai.should();
 chai.use(chaiHttp);
 
-function helloworld() {
-    return "Hello world!";
-  }
-  
-  describe("Testing authentication", () => {
-    it("Testing login", function () {
-      chai.assert.equal(helloworld(), "Hello world!")
-      return null;
+//Test authentication
+describe("Testing Authentication Module", () => {
+    it("Checking", (done) => {
+      let login = {
+        "username": "ahoneywood4",
+        "password": "VvvAr5kn"
+      }
+        chai
+        .request(server)
+        .post("/login")
+        .send(login)
+        .end((err, response) => {
+            console.log(response);
+            //response.body.should.be.a('object')
+            done();
+        });
     });
   });
