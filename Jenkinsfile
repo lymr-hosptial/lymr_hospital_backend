@@ -3,7 +3,7 @@ pipeline{
     stages{
         stage('Stage 1'){
             steps{
-                sh 'docker-compose up'
+                sh 'docker-compose version'
                 //sh 'kubectl create -f kube.yaml'
             }
         }
