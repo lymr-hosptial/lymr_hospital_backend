@@ -3,8 +3,8 @@ pipeline{
     stages{
         stage('Stage 1'){
             steps{
-                sh 'sudo -u akabawi docker compose build'
-                sh 'sudo -u akabawi kubectl create -f kube.yaml'
+                sh 'sudo -u makram docker compose build'
+                sh 'sudo -u makram kubectl create -f kube.yaml'
             }
         }
     }
