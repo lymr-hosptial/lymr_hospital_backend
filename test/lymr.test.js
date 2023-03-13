@@ -6,7 +6,7 @@ let server = require("../authentication/index");
 chai.should();
 chai.use(chaiHttp);
 
-//Test authentication
+//Test authentication module
 describe("Testing Authentication Module", () => {
     
       it("Checking for response", (done) => {
