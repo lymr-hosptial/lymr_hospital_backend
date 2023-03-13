@@ -8,7 +8,7 @@ spec:
   containers:
   - name: auth-cont
     image: localhost:5000/auth-im
-    imagePullPolicy: Never
+    imagePullPolicy: Always
     ports:
     - name:  port1
       containerPort: 3000
@@ -25,7 +25,7 @@ spec:
   containers:
   - name: reg-cont
     image: localhost:5000/reg-im
-    imagePullPolicy: Never
+    imagePullPolicy: Always
     ports:
     - name:  port2
       containerPort: 3000
@@ -42,7 +42,7 @@ spec:
   containers:
   - name: pd-cont
     image: localhost:5000/pd-im
-    imagePullPolicy: Never
+    imagePullPolicy: Always
     ports:
     - name:  port3
       containerPort: 3000
