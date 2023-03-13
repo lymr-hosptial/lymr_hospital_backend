@@ -3,8 +3,8 @@ pipeline{
     stages{
         stage('Stage 1'){
             steps{
-                sh 'docker compose build'
-                sh 'kubectl create -f kube.yaml'
+                bat 'docker compose build'
+                bat 'kubectl create -f kube.yaml'
             }
         }
     }
