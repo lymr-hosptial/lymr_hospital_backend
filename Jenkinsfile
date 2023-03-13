@@ -3,8 +3,8 @@ pipeline{
     stages{
         stage('Stage 1'){
             steps{
-                sh 'lavanyaseetharaman docker compose build'
-                sh 'lavanyaseetharaman kubectl create -f kube.yaml'
+                sh 'docker compose build'
+                sh 'kubectl create -f kube.yaml'
             }
         }
     }
