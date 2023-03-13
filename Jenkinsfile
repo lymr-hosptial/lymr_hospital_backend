@@ -4,7 +4,7 @@ pipeline{
         stage('Stage 1'){
             steps{
                 sh '/usr/local/bin/docker compose build'
-                sh 'kubectl create -f kube.yaml'
+                sh '/opt/homebrew/bin/kubectl create -f kube.yaml'
             }
         }
     }
