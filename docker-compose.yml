@@ -3,20 +3,20 @@ version: "3.3"
 services:
   authentication:
     build: authentication/.
-    image: localhost:5000/auth-im
+    image: localhost:5000/auth-im:auth-im
     ports:
       - "3000"
     networks:
       - backend
   registration:
-    image: localhost:5000/reg-im
+    image: localhost:5000/reg-im:reg-im
     build: registration/.
     ports:
       - "3000"
     networks:
       - backend
   patientdata:
-    image: localhost:5000/pd-im
+    image: localhost:5000/pd-im:pd-im
     build: patientdata/.
     ports:
       - "3000"
