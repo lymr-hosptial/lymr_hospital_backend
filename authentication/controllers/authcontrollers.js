@@ -2,8 +2,8 @@ const { dbInstance } = require("../config/database");
 const jwt_token = require("jsonwebtoken");
 const dotenv = require("dotenv");
 dotenv.config();
-const userNotExist = {
-  message: "User does not exist in our system. Please contact the administrator",
+const NotAuthenticated = {
+  message: "Login details are invalid",
 };
 const login = (req, res) => {
   let { username, password } = req.body;
@@ -13,8 +13,7 @@ const login = (req, res) => {
       .collection("employee")
       .find({ username: username, password: password })
       .toArray();
-    //console.log(results);
-    if (results) {
+    if (results.length!=0) {
       jwt_token.sign(
         { username: username },
         process.env.KEY,
@@ -24,13 +23,12 @@ const login = (req, res) => {
             username,
             user_id: results[0]._id,
             token,
-            message: "logged in successfully",
+            message: "Logged in successfully",
           });
         }
       );
     } else {
-      console.log('No result')
-      return res.status(404).json(userNotExist); //sending user doesn't exist
+      return res.status(404).json(NotAuthenticated); //sending not authorized
     }
   }, res);
 };
