@@ -29,6 +29,7 @@ const login = (req, res) => {
         }
       );
     } else {
+      console.log('No result')
       return res.status(404).json(userNotExist); //sending user doesn't exist
     }
   }, res);
