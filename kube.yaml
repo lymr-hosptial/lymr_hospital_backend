@@ -9,6 +9,10 @@ spec:
   - name: auth-cont
     image: auth-im
     imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        memory: "500Mi"
+        cpu: "500m"
     ports:
     - name:  port1
       containerPort: 3000
@@ -26,6 +30,10 @@ spec:
   - name: reg-cont
     image: reg-im
     imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        memory: "500Mi"
+        cpu: "500m"
     ports:
     - name:  port2
       containerPort: 3000
@@ -43,6 +51,10 @@ spec:
   - name: pd-cont
     image: pd-im
     imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        memory: "500Mi"
+        cpu: "500m"
     ports:
     - name:  port3
       containerPort: 3000
