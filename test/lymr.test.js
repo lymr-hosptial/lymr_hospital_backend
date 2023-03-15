@@ -23,7 +23,7 @@ describe("Testing Authentication Module", () => {
             var result = JSON.parse(JSON.stringify(response.body));
             
             console.log(result.message);
-            result.message.should.be.eq('logged in successfull')
+            result.message.should.be.eq('logged in successfully')
             //response.body.should.be.a('object')
             
           });
