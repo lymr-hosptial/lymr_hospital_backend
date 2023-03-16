@@ -13,10 +13,10 @@ const login = (req, res) => {
 
     const dbres = await db.collection('employee').find({'username':String(username)}).toArray();;
     if (dbres[0]==null){
-     return res.json(NotAuthenticated); //sending not authorized
+     return res.status(404).json(NotAuthenticated); //sending not authorized
     }
 
-     const result = await bcrypt.compare(String(password),String(dbres[0].password));
+    const result = await bcrypt.compare(String(password),String(dbres[0].password));
     
     if (result) {
       jwt_token.sign(
@@ -33,7 +33,7 @@ const login = (req, res) => {
         }
       );
     } else {
-      return res.json(NotAuthenticated); //sending not authorized
+      return res.status(404).json(NotAuthenticated); //sending not authorized
     }
   }, res);
 };
