@@ -1,6 +1,7 @@
 const { dbInstance } = require("../config/database");
 const jwt_token = require("jsonwebtoken");
 const dotenv = require("dotenv");
+const bcrypt = require("bcrypt")
 dotenv.config();
 const NotAuthenticated = {
   message: "Login details are invalid",
@@ -9,26 +10,30 @@ const login = (req, res) => {
   let { username, password } = req.body;
 
   dbInstance(async (db) => {
-    const results = await db
-      .collection("employee")
-      .find({ username: username, password: password })
-      .toArray();
-    if (results.length!=0) {
+
+    const dbres = await db.collection('employee').find({'username':String(username)}).toArray();;
+    if (dbres[0]==null){
+     return res.json(NotAuthenticated); //sending not authorized
+    }
+
+     const result = await bcrypt.compare(String(password),String(dbres[0].password));
+    
+    if (result) {
       jwt_token.sign(
         { username: username },
         process.env.KEY,
         (err, token) => {
-          console.log();
           return res.status(200).json({
             username,
-            user_id: results[0]._id,
+            role: dbres[0].role,
+            user_id: dbres[0]._id,
             token,
             message: "Logged in successfully",
           });
         }
       );
     } else {
-      return res.status(404).json(NotAuthenticated); //sending not authorized
+      return res.json(NotAuthenticated); //sending not authorized
     }
   }, res);
 };
