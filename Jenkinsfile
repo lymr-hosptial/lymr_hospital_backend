@@ -6,6 +6,7 @@ pipeline{
                 bat 'docker compose build'
                 bat 'kubectl create -f kube.yaml'
             }
+        }
         stage('Scan') {
             steps {
                 withSonarQubeEnv(installationName: 'sq1') {
@@ -16,4 +17,3 @@ pipeline{
             
         }
     }
-}
