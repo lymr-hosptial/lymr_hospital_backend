@@ -3,6 +3,7 @@ pipeline{
     stages{
         stage('Stage 1'){
             steps{
+                print(" test")
                 //bat 'docker compose build'
                 //bat 'kubectl create -f kube.yaml'
             }
