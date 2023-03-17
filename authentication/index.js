@@ -1,4 +1,5 @@
 const server = require("express");
+const https = require('https');
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const filesystem = require("fs");
@@ -31,7 +32,7 @@ app.use((req, res, next) => {
   );
   next();
 });
-app.get("/", (req, res) => res.send("lymr authentication, API!"));
+app.get("/", (req, res) => res.send("LYMR authentication API!"));
 
 
 filesystem.readdir(path.join(__dirname, "routes"), (err, files) => {
@@ -42,8 +43,13 @@ filesystem.readdir(path.join(__dirname, "routes"), (err, files) => {
     app.use(BASE_URL, require(`./routes/${file}`));
   });
 });
-app.listen(port, () =>
+
+https.createServer({key: filesystem.readFileSync("key.pem"),cert: filesystem.readFileSync("cert.pem")}, app).listen(port,()=>
   console.log(`Authentication API listening on port ${port}!`)
 );
+
+// app.listen(port, () =>
+//   console.log(`Authentication API listening on port ${port}!`)
+// );
 module.exports = app;
 
