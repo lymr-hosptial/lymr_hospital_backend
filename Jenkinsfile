@@ -8,13 +8,20 @@ pipeline{
                 //bat 'kubectl create -f kube.yaml'
             }
         }
-        stage('Scan') {
+        stage('SonarQube analysis') {
             steps {
+                def scannerHome = tool 'SONAR_RUNNER';
                 withSonarQubeEnv(installationName: 'sq1') {
-                    bat '"C:>temp>apache-maven-3.9.0-bin>apache-maven-3.9.0>bin>mvn" clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'
+                    bat "\"${scannerHome}\\bin\\sonar-scanner.bat\""
+                
+               
+       
+       }
+                
+                
                 }
             }
         }
             
         }
-    }
+    
