@@ -12,7 +12,7 @@ pipeline{
             steps {
                // def scannerHome = tool 'SONAR_RUNNER';
                 withSonarQubeEnv(installationName: 'sq1') {
-                    bat "sonar-scanner.bat""
+                    bat "sonar-scanner.bat"
                 
                
        
