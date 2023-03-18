@@ -20,9 +20,12 @@ pipeline{
         stage('Stage 4: RUN ZAP SCAN'){
             steps{
              dir('D:/Program Files/OWASP/Zed Attack Proxy'){
-               bat 'java -jar zap-2.12.0.jar -cmd -quickurl https://localhost:30002/ -quickout Auth.out'
-               bat 'java -jar zap-2.12.0.jar -cmd -quickurl https://localhost:30003/ -quickout Reg.out'
-               bat 'java -jar zap-2.12.0.jar -cmd -quickurl https://localhost:30004/ -quickout PD.out'
+              echo 'java -jar zap-2.12.0.jar' > script.sh
+              bat 'sh script.sh  -cmd -quickurl https://localhost:30002/ -quickout Auth.out'
+              bat 'sh script.sh  -cmd -quickurl https://localhost:30003/ -quickout Reg.out'
+              bat 'sh script.sh  -cmd -quickurl https://localhost:30004/ -quickout PD.out'
+               //bat 'java -jar zap-2.12.0.jar -cmd -quickurl https://localhost:30003/ -quickout Reg.out'
+               //bat 'java -jar zap-2.12.0.jar -cmd -quickurl https://localhost:30004/ -quickout PD.out'
              }
 
             }
