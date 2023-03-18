@@ -1,7 +1,4 @@
 pipeline{
-   environment {
-   ZAPPOXY_HOME="D:\Program Files\OWASP\Zed Attack Proxy"
-    }
     agent any
     stages{
         stage('Stage 1: Cleanup'){
