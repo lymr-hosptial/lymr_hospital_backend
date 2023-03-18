@@ -19,10 +19,11 @@ pipeline{
         }
         stage('Stage 4: RUN ZAP SCAN'){
             steps{
+               set PATH = "%ZAPPOXY_HOME%;%PATH%"
 
-               bat "java -jar "$ZAPROXY_HOME\zap-2.12.0.jar" -cmd -quickurl https://localhost:30002/ -quickout Auth.out" 
-               bat "java -jar "$ZAPROXY_HOME\zap-2.12.0.jar" -cmd -quickurl https://localhost:30003/ -quickout Reg.out"
-               bat "java -jar "$ZAPROXY_HOME\zap-2.12.0.jar" -cmd -quickurl https://localhost:30004/ -quickout PD.out"
+               bat 'java -jar zap-2.12.0.jar -cmd -quickurl https://localhost:30002/ -quickout Auth.out'
+               bat 'java -jar zap-2.12.0.jar -cmd -quickurl https://localhost:30003/ -quickout Reg.out'
+               bat 'java -jar zap-2.12.0.jar -cmd -quickurl https://localhost:30004/ -quickout PD.out'
 
             }
         }
