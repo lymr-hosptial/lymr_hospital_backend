@@ -19,7 +19,6 @@ pipeline{
         }
         stage('Stage 4: RUN ZAP SCAN'){
             steps{
-               def fileContent = readFile "<file_path>"
                bat 'java -jar zap-2.12.0.jar -cmd -quickurl https://localhost:30002/ -quickout Auth.out' 
                bat 'java -jar zap-2.12.0.jar -cmd -quickurl https://localhost:30003/ -quickout Reg.out'
                bat 'java -jar zap-2.12.0.jar -cmd -quickurl https://localhost:30004/ -quickout PD.out'
