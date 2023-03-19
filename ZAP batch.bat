@@ -1,0 +1,3 @@
+ java -jar "C:\Program Files\OWASP\Zed Attack Proxy\zap-2.12.0.jar" -cmd -quickurl https://localhost:30002/ -quickout C:\Users\Makram\.jenkins\workspace\LYMAR\Auth.out
+ java -jar "C:\Program Files\OWASP\Zed Attack Proxy\zap-2.12.0.jar" -cmd -quickurl https://localhost:30003/ -quickout C:\Users\Makram\.jenkins\workspace\LYMAR\Reg.out
+ java -jar "C:\Program Files\OWASP\Zed Attack Proxy\zap-2.12.0.jar" -cmd -quickurl https://localhost:30004/ -quickout C:\Users\Makram\.jenkins\workspace\LYMAR\PD.out
