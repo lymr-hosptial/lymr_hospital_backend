@@ -4,8 +4,8 @@ pipeline{
         stage('Build Containers'){
             steps{
                 print(" test")
-                //bat 'docker compose build'
-                //bat 'kubectl create -f kube.yaml'
+                bat 'docker compose build'
+                bat 'kubectl create -f kube.yaml'
             }
         }
         stage('SonarQube analysis') {
