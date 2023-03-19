@@ -1,7 +1,7 @@
 pipeline{
     agent any
     stages{
-        stage('Stage 1'){
+        stage('Build Containers'){
             steps{
                 print(" test")
                 //bat 'docker compose build'
@@ -17,9 +17,24 @@ pipeline{
                
        
        }
+               
+                
+                }
+
+        }
+
+        stage('Quality Gate') {
+            steps {
+               timeout(time:2, wait: 'MINUTES')  {
+                    waitForQualityGate abortPipeline: true
+                
+               
+       
+       }
                 
                 
                 }
+            
             }
         }
             
