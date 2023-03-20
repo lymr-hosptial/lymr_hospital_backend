@@ -42,7 +42,7 @@ filesystem.readdir(path.join(__dirname, "routes"), (err, files) => {
     app.use(BASE_URL, require(`./routes/${file}`));
   });
 });
-app.listen(port, () =>
+module.exports = app.listen(port, () =>
   console.log(`Authentication API listening on port ${port}!`)
 );
 

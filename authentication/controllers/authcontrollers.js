@@ -1,20 +1,25 @@
 const { dbInstance } = require("../config/database");
 const jwt_token = require("jsonwebtoken");
 const dotenv = require("dotenv");
+const bcrypt = require("bcrypt");
 dotenv.config();
 const userNotExist = {
   message: "User not exist in our system .contact the administrator",
 };
 const login = (req, res) => {
   let { username, password } = req.body;
-
+// console.log(req.body);
   dbInstance(async (db) => {
-    const results = await db
-      .collection("employee")
-      .find({ username: username, password: password })
-      .toArray();
-    console.log(results);
-    if (results) {
+    // console.log(db);
+    const dbres = await db.collection('employee').find({'username':String(username)}).toArray();
+    // console.log(dbres);
+    if (dbres[0]==null){
+     return res.status(404).json(NotAuthenticated); //sending not authorized
+    }
+    
+    const result = await bcrypt.compare(String(password),String(dbres[0].password));
+    console.log(password,result);
+    if (result) {
       jwt_token.sign(
         { username: username },
         process.env.KEY,
@@ -22,7 +27,8 @@ const login = (req, res) => {
           console.log();
           return res.status(200).json({
             username,
-            user_id: results[0]._id,
+            role: dbres[0].role,
+            user_id: dbres[0]._id,
             token,
             message: "logged in successfully",
           });
@@ -34,7 +40,7 @@ const login = (req, res) => {
   }, res);
 };
 
-const addEmployee = (req, res) => {
+const addEmployee = async(req, res) => {
   let {
     first_name,
     last_name,
@@ -50,6 +56,7 @@ const addEmployee = (req, res) => {
     position,
     active,
   } = req.body;
+  let hpassword = await bcrypt.hash(password, 10);
   jwt_token.verify(req.token, process.env.SECRET_TOKEN, (err, decoded) => {
     if (!err) {
       let query = {
@@ -60,7 +67,7 @@ const addEmployee = (req, res) => {
         phone: phone,
         address: address,
         username: username,
-        password: password,
+        password: hpassword,
         date_of_birth: new Date(date_of_birth),
         date_of_join: new Date(date_of_join),
         role: role,
