@@ -7,7 +7,7 @@ let chaiHttp = require("chai-http");
 let should = chai.should();
 chai.use(chaiHttp);
 // let { dbInstance } = require("../config/database");
-let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImxhdmFuMjAiLCJpYXQiOjE2NzkwNjA5Mzh9.-5xw1bj9yapsNERNzrTPIv8KJ6c_9j5u5Cftce5a7H8';
+let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im9iYXJ3b29kNSIsImlhdCI6MTY3OTMzMDA2NH0.8Zra1vBGvz5T2Sm-FCKNjuNa7ezgmVsiq0nV8Rdbdsc";
 /*
  * Test the /POST login route
  */
@@ -76,14 +76,15 @@ describe('GET root api', () => {
     //     })
 
     it('should add new employee', (done)=>{
+        console.log(token);
         let employee ={
-                "first_name": "Peter",
+                "first_name": "newuser",
                 "last_name": "Woods",
-                "email": "joe@ucoz.com",
+                "email": "newuser@ucoz.com",
                 "gender": "M",
                 "phone": "8204241999",
                 "address": "961 Vidon Terrace",
-                "username": "peterwoods",
+                "username": "newuser",
                 "password": "123456",
                 "date_of_birth": "1982-03-08T20:00:00.000Z",
                 "date_of_join": "1971-12-07T20:00:00.000Z",
@@ -95,11 +96,11 @@ describe('GET root api', () => {
         chai
         .request(server)
         .post("/api/v1/addemployee")
-        .set({ "Authorization": `Bearer ${token}` })
+        .set({ "Authorization": `bearer ${token}` })
         .send(employee)
         .end((err, res)=>{
             res.should.have.status(200);
-            // res.body.should.be.a('object'
+            // res.body.should.be.a('object');
             res.body.should.have
              .property("message")
              .eql("New Employee Add Successfully");

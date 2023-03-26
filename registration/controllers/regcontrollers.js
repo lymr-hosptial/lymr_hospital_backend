@@ -1,5 +1,6 @@
 const { dbInstance } = require("../config/database");
 const jwt_token = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
 dotenv.config();
 const port = process.env.SERVERPORT
@@ -42,7 +43,13 @@ const registerPatient=async(req,res)=>{
 
         const results = await db.collection('patient').insertOne(query)  //inserting the JSON file in the collection 'patient'
           if (results){
-            res.send(results);
+            let success_message = {
+              patient_id : results.insertedId,
+              status: results.acknowledged,
+              message:"New Patient Add Successfully"
+  
+            }
+            res.send(success_message);
           }else {
           res.send(error)
         }
@@ -65,6 +72,7 @@ const registerEmployee = async(req, res) => {
     position,
     active,
   } = req.body;
+  let hpassword = await bcrypt.hash(password, 10);
   const token = req.token;
   const us = jwt_token.verify(token,key); //verify the token and get the username
   dbInstance(async(db)=>{
@@ -84,7 +92,7 @@ const registerEmployee = async(req, res) => {
         phone: phone,
         address: address,
         username: username,
-        password: password,
+        password: hpassword,
         date_of_birth: new Date(date_of_birth),
         date_of_join: new Date(date_of_join),
         role: role,
@@ -92,6 +100,7 @@ const registerEmployee = async(req, res) => {
         active: active,
       };
       console.log(query);
+      
       dbInstance(async (db) => {
         const results = await db.collection("employee").insertOne(query);
         console.log(results);

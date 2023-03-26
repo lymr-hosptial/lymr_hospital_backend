@@ -31,18 +31,18 @@ app.use((req, res, next) => {
   );
   next();
 });
-app.get("/", (req, res) => res.send("lymr authentication, API!"));
+app.get("/", (req, res) => res.send("lymr Registration, API!"));
 
 
 filesystem.readdir(path.join(__dirname, "routes"), (err, files) => {
   if (err) console.error("error in index readdir" + err);
 
   files.forEach((file) => {
-    console.log("LYMR Authentication index");
+    console.log("LYMR Registration index");
     app.use(BASE_URL, require(`./routes/${file}`));
   });
 });
-app.listen(port, () =>
-  console.log(`Authentication API listening on port ${port}!`)
+module.exports = app.listen(port, () =>
+  console.log(`Registration API listening on port ${port}!`)
 );
 

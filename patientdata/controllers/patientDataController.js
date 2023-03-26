@@ -1,12 +1,12 @@
 const { dbInstance } = require("../config/database");
 const jwt_token = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
-const { access } = require("fs");
+// const { access } = require("fs");
 const MongoClient = require("mongodb")
-
 dotenv.config();
-const port = process.env.SERVERPORT;
-const key = process.env.KEY;
+const port = process.env.SERVERPORT
+const key = process.env.KEY
 
 const getPatientReportEmail= async(req, res)=>{
 //get email and token from the API request
@@ -14,6 +14,7 @@ const email = req.query.em.toString();
 const token = req.token;
 console.log(token, key);
 const us = jwt_token.verify(token,key); //verify the token and get the username
+console.log(us);
 // var roleAccess="";
 dbInstance(async(db)=>{
     const role = await db.collection('employee').find({'username':us.username}).toArray();    //get the role from the employee collection in the DB
