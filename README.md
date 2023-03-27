@@ -3,7 +3,7 @@
 
 # lymr_hospital_backend Docker Microservice Project
 
-<h3>This project uses Docker to containerize a microservice and make it easy to run and deploy.</h3>
+<h3>This project uses Docker and Kubernetes to containerize a microservice and make it easy to run and deploy.</h3>
 
 ## Prerequisites
 <ul>
