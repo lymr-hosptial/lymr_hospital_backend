@@ -4,7 +4,7 @@ pipeline{
         stage('Stage 1: Cleanup'){
             steps{
                 sh """sudo -u akabawi kubectl delete -f kube.yaml --ignore-not-found=true"""
-                sh """sudo -u akabawi docker rmi auth-im reg-im pd-im"""
+                sh """sudo -u akabawi docker rmi auth-im reg-im pd-im &>/dev/null"""
             }
         }
         stage('Stage 2: Code Quality and Security Testing'){
