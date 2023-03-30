@@ -1,3 +1,5 @@
+const client = require('prom-client');
+const promBundle = require("express-prom-bundle");
 const server = require("express");
 const https = require("https")
 const bodyParser = require("body-parser");
@@ -32,6 +34,10 @@ app.use((req, res, next) => {
   );
   next();
 });
+
+const metricsMiddleware = promBundle({includeMethod: true});
+app.use(metricsMiddleware);
+
 app.get("/", (req, res) => res.send("LYMR patient data API!"));
 
 
