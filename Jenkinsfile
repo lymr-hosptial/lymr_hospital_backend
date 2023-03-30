@@ -29,9 +29,9 @@ pipeline{
         }
         stage('Stage 5: Security Testing'){
             steps{
-                sh """sudo ./zap.sh -cmd -port 8089 -quickurl https://localhost:30002/ -quickout /home/akabawi/out.html -quickprogress"""
-                sh """sudo ./zap.sh -cmd -port 8089 -quickurl https://localhost:30003/ -quickout /home/akabawi/out.html -quickprogress"""
-                sh """sudo ./zap.sh -cmd -port 8089 -quickurl https://localhost:30004/ -quickout /home/akabawi/out.html -quickprogress"""
+                sh """sudo /home/akabawi/Downloads/ZAP_2.12.0/zap.sh -cmd -port 8089 -quickurl https://localhost:30002/ -quickout /home/akabawi/Documents/out-auth.html -quickprogress"""
+                sh """sudo /home/akabawi/Downloads/ZAP_2.12.0/zap.sh -cmd -port 8089 -quickurl https://localhost:30003/ -quickout /home/akabawi/Documents/out-reg.html -quickprogress"""
+                sh """sudo /home/akabawi/Downloads/ZAP_2.12.0/zap.sh -cmd -port 8089 -quickurl https://localhost:30004/ -quickout /home/akabawi/Documents/out-pd.html -quickprogress"""
                 // withSonarQubeEnv(installationName: 'sq1'){
                 //     sh """sudo -u akabawi /home/akabawi/sonar-scanner-4.2.0.1873-linux/bin/sonar-scanner"""
                 // }
