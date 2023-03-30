@@ -16,7 +16,7 @@ pipeline{
         //         sh 'cd ../registration'
         //         sh 'sudo -u akabawi npm run test'
         //     }
-        ///}
+        //}
         stage('Stage 3: Build Docker Images'){
             steps{
                 sh 'sudo -u akabawi docker compose build'
