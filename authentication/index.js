@@ -38,13 +38,6 @@ app.use((req, res, next) => {
 const metricsMiddleware = promBundle({includeMethod: true});
 app.use(metricsMiddleware);
 
-
-// app.get('/metrics', async (req, res) => {
-//   res.setHeader('Content-Type', register.contentType);
-//   res.send(await register.metrics());
-// });
-
-
 app.get("/", (req, res) => res.send("LYMR authentication API!"));
 
 
