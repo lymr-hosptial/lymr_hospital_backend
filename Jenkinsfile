@@ -14,16 +14,16 @@ pipeline{
                  }
             }
         }
-        // stage('Stage 3: Unit Testing'){
-        //     steps{
-        //         sh 'cd authentication'
-        //         sh 'sudo -u akabawi npm test'
-        //         sh 'cd ../patientdata'
-        //         sh 'sudo -u akabawi npm test'
-        //         sh 'cd ../registration'
-        //         sh 'sudo -u akabawi npm test'
-        //     }
-        // }
+        stage('Stage 3: Unit Testing'){
+            steps{
+                dir('authentication'){
+                    sh 'sudo -u akabawi npm test'}
+                // sh 'cd ../patientdata'
+                // sh 'sudo -u akabawi npm test'
+                // sh 'cd ../registration'
+                // sh 'sudo -u akabawi npm test'
+            }
+        }
         stage('Stage 4: Build Docker Images'){
             steps{
                 sh 'sudo -u akabawi docker compose build'
