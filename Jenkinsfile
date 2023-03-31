@@ -14,7 +14,7 @@ pipeline{
                  }
             }
         }
-        // stage('Stage 2: Unit Testing'){
+        // stage('Stage 3: Unit Testing'){
         //     steps{
         //         sh 'cd authentication'
         //         sh 'sudo -u akabawi npm run test'
@@ -24,17 +24,17 @@ pipeline{
         //         sh 'sudo -u akabawi npm run test'
         //     }
         //}
-        stage('Stage 3: Build Docker Images'){
+        stage('Stage 4: Build Docker Images'){
             steps{
                 sh 'sudo -u akabawi docker compose build'
             }
         }        
-        stage('Stage 4: Deploy Kubernetes Services'){
+        stage('Stage 5: Deploy Kubernetes Services'){
             steps{
                 sh 'sudo -u akabawi kubectl create -f kube.yaml'
             }
         }
-        stage('Stage 5: Active Security Testing'){
+        stage('Stage 6: Active Security Testing'){
             steps{
                 sh """sudo /home/akabawi/Downloads/ZAP_2.12.0/zap.sh -cmd -port 8089 -quickurl https://localhost:30002/ -quickout /home/akabawi/Documents/out-auth.html -quickprogress 2>/dev/null"""
                 sh """sudo /home/akabawi/Downloads/ZAP_2.12.0/zap.sh -cmd -port 8089 -quickurl https://localhost:30003/ -quickout /home/akabawi/Documents/out-reg.html -quickprogress 2>/dev/null"""
