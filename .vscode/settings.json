@@ -1,0 +1,5 @@
+{
+    "yaml.schemas": {
+        "kubernetes://schema/v1%40pod": "file:///home/akabawi/Documents/DevOps/lymr-hospital/lymr_hospital_backend/kube.yaml"
+    }
+}

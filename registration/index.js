@@ -1,4 +1,7 @@
+const client = require('prom-client');
+const promBundle = require("express-prom-bundle");
 const server = require("express");
+const https = require("https")
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const filesystem = require("fs");
@@ -31,7 +34,13 @@ app.use((req, res, next) => {
   );
   next();
 });
-app.get("/", (req, res) => res.send("lymr Registration, API!"));
+
+
+const metricsMiddleware = promBundle({includeMethod: true});
+app.use(metricsMiddleware);
+
+app.get("/", (req, res) => res.send("LYMR registration API!"));
+
 
 
 filesystem.readdir(path.join(__dirname, "routes"), (err, files) => {
@@ -42,7 +51,11 @@ filesystem.readdir(path.join(__dirname, "routes"), (err, files) => {
     app.use(BASE_URL, require(`./routes/${file}`));
   });
 });
+
 module.exports = app.listen(port, () =>
+https.createServer({key: filesystem.readFileSync("key.pem"),cert: filesystem.readFileSync("cert.pem")}, app).listen(port,()=>
   console.log(`Registration API listening on port ${port}!`)
 );
+
+
 

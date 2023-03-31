@@ -7,8 +7,12 @@ metadata:
 spec:
   containers:
   - name: auth-cont
-    image: localhost:5000/auth-im
-    imagePullPolicy: Never
+    image: auth-im
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        memory: "500Mi"
+        cpu: "500m"
     ports:
     - name:  port1
       containerPort: 3000
@@ -24,8 +28,12 @@ metadata:
 spec:
   containers:
   - name: reg-cont
-    image: localhost:5000/reg-im
-    imagePullPolicy: Never
+    image: reg-im
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        memory: "500Mi"
+        cpu: "500m"
     ports:
     - name:  port2
       containerPort: 3000
@@ -41,8 +49,12 @@ metadata:
 spec:
   containers:
   - name: pd-cont
-    image: localhost:5000/pd-im
-    imagePullPolicy: Never
+    image: pd-im
+    imagePullPolicy: IfNotPresent
+    resources:
+      limits:
+        memory: "500Mi"
+        cpu: "500m"
     ports:
     - name:  port3
       containerPort: 3000

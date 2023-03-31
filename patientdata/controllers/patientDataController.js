@@ -58,9 +58,7 @@ const getPatientReportID = async (req,res)=>{
     //get id and token from the API request
 const pat_id = req.query.id.toString();
 const token = req.token;
-console.log(token , key);
 const us = jwt_token.verify(token,key); //verify the token and get the username
-console.log(us.username);
 dbInstance(async(db)=>{
     const role = await db.collection('employee').find({'username':us.username}).toArray();    //get the role from the employee collection in the DB
     const access = await db.collection('acl').find({'role':role[0].role}).toArray();      //get the access right from the acl collection in the DB
