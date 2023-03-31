@@ -1,7 +1,7 @@
 process.env.NODE_ENV = "test";
 const express = require("express");
 const app = express();
-let server = require("./authentication/index");
+let server = require("./authentication");
 let chai = require("chai");
 let chaiHttp = require("chai-http");
 let should = chai.should();
@@ -10,6 +10,7 @@ let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im9iYXJ3b29kNS
 /*
  * Test the /POST login route
  */
+server.app();
 describe('GET root api', () => {
     it('should console the base url', (done) => {
         chai
