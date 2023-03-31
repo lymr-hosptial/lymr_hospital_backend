@@ -14,7 +14,6 @@ let token =
  */
 describe("POST employee api", () => {
   it("should add new employee", (done) => {
-    console.log(token);
     let employee = {
       first_name: "lavanuser",
       last_name: "Woods",
@@ -50,7 +49,6 @@ describe("POST employee api", () => {
 describe("POST patient api", () => {
   //test the create a new patient
   it("should add new patient", (done) => {
-    console.log(token);
     chai
       .request(server)
       .post("/api/v1/registerpatient")

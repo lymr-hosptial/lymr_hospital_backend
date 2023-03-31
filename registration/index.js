@@ -52,10 +52,10 @@ filesystem.readdir(path.join(__dirname, "routes"), (err, files) => {
   });
 });
 
-module.exports = app.listen(port, () =>
+
 https.createServer({key: filesystem.readFileSync("key.pem"),cert: filesystem.readFileSync("cert.pem")}, app).listen(port,()=>
   console.log(`Registration API listening on port ${port}!`)
 );
 
-
+module.exports = app;
 

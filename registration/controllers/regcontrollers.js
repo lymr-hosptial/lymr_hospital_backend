@@ -39,7 +39,6 @@ const registerPatient=async(req,res)=>{
           "date_of_birth" : date_of_birth,
           "status": status,
           "bloodtype": bloodtype}
-          console.log(query);
 
         const results = await db.collection('patient').insertOne(query)  //inserting the JSON file in the collection 'patient'
           if (results){
@@ -99,11 +98,9 @@ const registerEmployee = async(req, res) => {
         position: position,
         active: active,
       };
-      console.log(query);
       
       dbInstance(async (db) => {
         const results = await db.collection("employee").insertOne(query);
-        console.log(results);
         if (results) {
           let success_message = {
             employee_id : results.insertedId,

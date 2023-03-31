@@ -12,14 +12,11 @@ const getPatientReportEmail= async(req, res)=>{
 //get email and token from the API request
 const email = req.query.em.toString();
 const token = req.token;
-console.log(token, key);
 const us = jwt_token.verify(token,key); //verify the token and get the username
-console.log(us);
 // var roleAccess="";
 dbInstance(async(db)=>{
     const role = await db.collection('employee').find({'username':us.username}).toArray();    //get the role from the employee collection in the DB
     const access = await db.collection('acl').find({'role':role[0].role}).toArray();      //get the access right from the acl collection in the DB
-    console.log(access);
     var roleAccess= access[0].access;
     if (!roleAccess.includes('patient_data')) {     //check if the username is authorized to access patient data
        return res.json({'Error':'User not authorised'})   //User is not authorized

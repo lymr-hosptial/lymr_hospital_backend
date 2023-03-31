@@ -1,7 +1,7 @@
 process.env.NODE_ENV = "test";
 const express = require("express");
 const app = express();
-let server = require("../index");
+let server = require("./authentication/index");
 let chai = require("chai");
 let chaiHttp = require("chai-http");
 let should = chai.should();

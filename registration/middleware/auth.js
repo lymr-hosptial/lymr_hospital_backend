@@ -3,7 +3,6 @@ const authToken = (req, res, next)=> {
     const bearerToken = req.headers["authorization"];
     if (typeof bearerToken !== "undefined") {
       const bearer = bearerToken.split(" ");
-      console.log(bearer);
       const token = bearer[1];
       req.token = token;
       next();//nodejs 
