@@ -6,7 +6,6 @@ let chai = require("chai");
 let chaiHttp = require("chai-http");
 let should = chai.should();
 chai.use(chaiHttp);
-// let { dbInstance } = require("../config/database");
 let token =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im9iYXJ3b29kNSIsImlhdCI6MTY3NzU4NjM5NH0.KWNtYFrsryETBSscod4vi0g4fL_OXvr-wtKW2X_xO-Y";
 /*
@@ -37,7 +36,6 @@ describe("POST employee api", () => {
       .send(employee)
       .end((err, res) => {
         res.should.have.status(200);
-        // res.body.should.be.a('object');
         res.body.should.have
           .property("message")
           .eql("New Employee Add Successfully");
@@ -67,7 +65,6 @@ describe("POST patient api", () => {
       })
       .end((err, res) => {
         res.should.have.status(200);
-        // res.body.should.be.a('object');
         res.body.should.have
           .property("message")
           .eql("New Patient Add Successfully");

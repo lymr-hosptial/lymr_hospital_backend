@@ -2,7 +2,6 @@ const { dbInstance } = require("../config/database");
 const jwt_token = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
-// const { access } = require("fs");
 const MongoClient = require("mongodb")
 dotenv.config();
 const port = process.env.SERVERPORT
@@ -13,11 +12,10 @@ const getPatientReportEmail= async(req, res)=>{
 const email = req.query.em.toString();
 const token = req.token;
 const us = jwt_token.verify(token,key); //verify the token and get the username
-// var roleAccess="";
 dbInstance(async(db)=>{
     const role = await db.collection('employee').find({'username':us.username}).toArray();    //get the role from the employee collection in the DB
     const access = await db.collection('acl').find({'role':role[0].role}).toArray();      //get the access right from the acl collection in the DB
-    var roleAccess= access[0].access;
+    const roleAccess= access[0].access;
     if (!roleAccess.includes('patient_data')) {     //check if the username is authorized to access patient data
        return res.json({'Error':'User not authorised'})   //User is not authorized
     }else {                                      //user is authorized
@@ -59,7 +57,7 @@ const us = jwt_token.verify(token,key); //verify the token and get the username
 dbInstance(async(db)=>{
     const role = await db.collection('employee').find({'username':us.username}).toArray();    //get the role from the employee collection in the DB
     const access = await db.collection('acl').find({'role':role[0].role}).toArray();      //get the access right from the acl collection in the DB
-    var roleAccess= access[0].access;
+    const roleAccess= access[0].access;
     if (!roleAccess.includes('patient_data')) {     //check if the username is authorized to access patient data
        return res.json({'Error':'User not authorised'})   //User is not authorized
     }else {                                      //user is authorized

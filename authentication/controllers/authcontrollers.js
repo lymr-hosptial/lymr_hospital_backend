@@ -8,7 +8,6 @@ const NotAuthenticated = {
 };
 const login = (req, res) => {
   let { username, password } = req.body;
-// console.log(req.body);
   dbInstance(async (db) => {
     const dbres = await db.collection('employee').find({'username':String(username)}).toArray();;
     if (dbres[0]==null){
