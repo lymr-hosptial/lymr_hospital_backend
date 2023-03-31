@@ -44,5 +44,8 @@ pipeline{
                 sh """sudo /home/akabawi/Downloads/ZAP_2.12.0/zap.sh -cmd -port 8089 -quickurl https://localhost:30004/ -quickout /home/akabawi/Documents/test-reports/pd-zap-report.html -quickprogress 2>/dev/null"""  
             }
         }
+        stage('Stage 7: Cleanup Jenkins Workspace'){
+            cleanWs()
+        }
     }
 }
