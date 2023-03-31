@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "start": "node index.js",
-        "test": "jenkins-mocha"
+        "test": "mocha"
     },
     "keywords": [],
     "author": "Lavanya Seetharaman",
@@ -15,6 +15,7 @@
         "bcrypt": "^5.1.0",
         "bcryptjs": "^2.4.3",
         "body-parser": "^1.20.1",
+        "chai": "^4.3.7",
         "chai-http": "^4.3.0",
         "cors": "^2.8.5",
         "dotenv": "^16.0.3",
@@ -30,8 +31,5 @@
         "prom-client": "^14.2.0",
         "request": "^2.88.2",
         "supertest": "^6.3.3"
-    },
-    "devDependencies": {
-        "jenkins-mocha": "^9.0.0"
     }
 }
