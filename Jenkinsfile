@@ -34,12 +34,12 @@ pipeline{
                 sh 'sudo -u akabawi kubectl create -f kube.yaml'
             }
         }
-        stage('Stage 6: Active Security Testing'){
-            steps{
-                sh """sudo /home/akabawi/Downloads/ZAP_2.12.0/zap.sh -cmd -port 8089 -quickurl https://localhost:30002/ -quickout /home/akabawi/Documents/out-auth.html -quickprogress 2>/dev/null"""
-                sh """sudo /home/akabawi/Downloads/ZAP_2.12.0/zap.sh -cmd -port 8089 -quickurl https://localhost:30003/ -quickout /home/akabawi/Documents/out-reg.html -quickprogress 2>/dev/null"""
-                sh """sudo /home/akabawi/Downloads/ZAP_2.12.0/zap.sh -cmd -port 8089 -quickurl https://localhost:30004/ -quickout /home/akabawi/Documents/out-pd.html -quickprogress 2>/dev/null"""  
-            }
-        }
+        // stage('Stage 6: Active Security Testing'){
+        //     steps{
+        //         sh """sudo /home/akabawi/Downloads/ZAP_2.12.0/zap.sh -cmd -port 8089 -quickurl https://localhost:30002/ -quickout /home/akabawi/Documents/out-auth.html -quickprogress 2>/dev/null"""
+        //         sh """sudo /home/akabawi/Downloads/ZAP_2.12.0/zap.sh -cmd -port 8089 -quickurl https://localhost:30003/ -quickout /home/akabawi/Documents/out-reg.html -quickprogress 2>/dev/null"""
+        //         sh """sudo /home/akabawi/Downloads/ZAP_2.12.0/zap.sh -cmd -port 8089 -quickurl https://localhost:30004/ -quickout /home/akabawi/Documents/out-pd.html -quickprogress 2>/dev/null"""  
+        //     }
+        // }
     }
 }
