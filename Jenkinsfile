@@ -17,7 +17,7 @@ pipeline{
         stage('Stage 3: Unit Testing'){
             steps{
                 dir('authentication'){
-                    sh 'sudo npm install'
+                    //sh 'sudo npm install'
                     sh 'sudo npm test'}
                 // sh 'cd ../patientdata'
                 // sh 'sudo -u akabawi npm test'
