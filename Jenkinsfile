@@ -45,7 +45,9 @@ pipeline{
         //     }
         // }
         stage('Stage 7: Cleanup Jenkins Workspace'){
+            steps{
             cleanWs()
+            }
         }
     }
 }
