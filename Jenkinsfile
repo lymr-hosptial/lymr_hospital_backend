@@ -19,10 +19,12 @@ pipeline{
                 dir('authentication'){
                     sh 'sudo npm install chai'
                     sh 'npm test'}
-                // sh 'cd ../patientdata'
-                // sh 'sudo -u akabawi npm test'
-                // sh 'cd ../registration'
-                // sh 'sudo -u akabawi npm test'
+                dir('patientdata'){
+                    sh 'sudo npm install chai'
+                    sh 'npm test'}
+                dir('registration'){
+                    sh 'sudo npm install chai'
+                    sh 'npm test'}
             }
         }
         // stage('Stage 4: Build Docker Images'){
@@ -37,9 +39,9 @@ pipeline{
         // }
         // stage('Stage 6: Active Security Testing'){
         //     steps{
-        //         sh """sudo /home/akabawi/Downloads/ZAP_2.12.0/zap.sh -cmd -port 8089 -quickurl https://localhost:30002/ -quickout /home/akabawi/Documents/out-auth.html -quickprogress 2>/dev/null"""
-        //         sh """sudo /home/akabawi/Downloads/ZAP_2.12.0/zap.sh -cmd -port 8089 -quickurl https://localhost:30003/ -quickout /home/akabawi/Documents/out-reg.html -quickprogress 2>/dev/null"""
-        //         sh """sudo /home/akabawi/Downloads/ZAP_2.12.0/zap.sh -cmd -port 8089 -quickurl https://localhost:30004/ -quickout /home/akabawi/Documents/out-pd.html -quickprogress 2>/dev/null"""  
+        //         sh """sudo /home/akabawi/Downloads/ZAP_2.12.0/zap.sh -cmd -port 8089 -quickurl https://localhost:30002/ -quickout /home/akabawi/Documents/test-reports/auth-zap-report.html -quickprogress 2>/dev/null"""
+        //         sh """sudo /home/akabawi/Downloads/ZAP_2.12.0/zap.sh -cmd -port 8089 -quickurl https://localhost:30003/ -quickout /home/akabawi/Documents/test-reports/reg-zap-report.html -quickprogress 2>/dev/null"""
+        //         sh """sudo /home/akabawi/Downloads/ZAP_2.12.0/zap.sh -cmd -port 8089 -quickurl https://localhost:30004/ -quickout /home/akabawi/Documents/test-reports/pd-zap-report.html -quickprogress 2>/dev/null"""  
         //     }
         // }
     }
