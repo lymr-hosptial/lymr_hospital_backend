@@ -35,10 +35,12 @@ app.use((req, res, next) => {
   next();
 });
 
+
 const metricsMiddleware = promBundle({includeMethod: true});
 app.use(metricsMiddleware);
 
 app.get("/", (req, res) => res.send("LYMR registration API!"));
+
 
 
 filesystem.readdir(path.join(__dirname, "routes"), (err, files) => {
@@ -50,11 +52,10 @@ filesystem.readdir(path.join(__dirname, "routes"), (err, files) => {
   });
 });
 
+module.exports = app.listen(port, () =>
 https.createServer({key: filesystem.readFileSync("key.pem"),cert: filesystem.readFileSync("cert.pem")}, app).listen(port,()=>
   console.log(`Registration API listening on port ${port}!`)
 );
 
-// app.listen(port, () =>
-//   console.log(`Authentication API listening on port ${port}!`)
-// );
+
 

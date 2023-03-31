@@ -1,23 +1,20 @@
 const { dbInstance } = require("../config/database");
 const jwt_token = require("jsonwebtoken");
 const dotenv = require("dotenv");
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcrypt");
 dotenv.config();
 const NotAuthenticated = {
   message: "Login details are invalid",
 };
 const login = (req, res) => {
   let { username, password } = req.body;
-
+// console.log(req.body);
   dbInstance(async (db) => {
-
     const dbres = await db.collection('employee').find({'username':String(username)}).toArray();;
     if (dbres[0]==null){
      return res.status(404).json(NotAuthenticated); //sending not authorized
     }
-
-    const result = await bcrypt.compare(String(password),String(dbres[0].password));
-    
+    const result = await bcrypt.compare(String(password),String(dbres[0].password));    
     if (result) {
       jwt_token.sign(
         { username: username },
@@ -38,7 +35,7 @@ const login = (req, res) => {
   }, res);
 };
 
-const addEmployee = (req, res) => {
+const addEmployee = async(req, res) => {
   let {
     first_name,
     last_name,
@@ -54,6 +51,7 @@ const addEmployee = (req, res) => {
     position,
     active,
   } = req.body;
+  let hpassword = await bcrypt.hash(password, 10);
   jwt_token.verify(req.token, process.env.SECRET_TOKEN, (err, decoded) => {
     if (!err) {
       let query = {
@@ -64,7 +62,7 @@ const addEmployee = (req, res) => {
         phone: phone,
         address: address,
         username: username,
-        password: password,
+        password: hpassword,
         date_of_birth: new Date(date_of_birth),
         date_of_join: new Date(date_of_join),
         role: role,
@@ -97,4 +95,4 @@ module.exports = {
   login,
   addEmployee,
 };
-
+// checking jira integration - #1
